@@ -48,7 +48,7 @@ func NewCommand(logger log.Logger, streams cmd.IOStreams) *cobra.Command {
 	}
 	cmd.Flags().StringVar(
 		&flags.BuildType, "type",
-		"docker", "build type, one of [bazel, docker]",
+		"docker", "build type, one of [bazel, docker, bindir]",
 	)
 	cmd.Flags().StringVar(
 		&flags.Image, "image",
@@ -58,7 +58,7 @@ func NewCommand(logger log.Logger, streams cmd.IOStreams) *cobra.Command {
 	cmd.Flags().StringVar(
 		&flags.KubeRoot, "kube-root",
 		"",
-		"path to the Kubernetes source directory (if empty, the path is autodetected)",
+		"path to the Kubernetes source or binary directory (if empty and mode is not bindir, the path is autodetected)",
 	)
 	cmd.Flags().StringVar(
 		&flags.BaseImage, "base-image",
