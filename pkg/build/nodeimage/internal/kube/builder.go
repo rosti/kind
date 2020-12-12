@@ -34,6 +34,7 @@ type Builder interface {
 // currently this includes:
 // "bazel" -> NewBazelBuilder(kubeRoot)
 // "docker" or "make" -> NewDockerBuilder(kubeRoot)
+// "bindir" -> NewBindirBuilder(kubeRoot)
 func NewNamedBuilder(logger log.Logger, name, kubeRoot, arch string) (Builder, error) {
 	fn, err := nameToImpl(name)
 	if err != nil {
@@ -52,6 +53,8 @@ func nameToImpl(name string) (func(log.Logger, string, string) (Builder, error),
 		return NewDockerBuilder, nil
 	case "make":
 		return NewDockerBuilder, nil
+	case "bindir":
+		return NewBindirBuilder, nil
 	default:
 	}
 	return nil, errors.Errorf("no Bits implementation with name: %s", name)
